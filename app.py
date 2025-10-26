@@ -1,19 +1,35 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template, redirect, url_for
+import os
+
 app = Flask(__name__)
+
+# In-memory student list
+students = [
+    {"name": "Joynase", "grade": 10, "section": "Zechariah"}
+]
 
 @app.route('/')
 def home():
-    return "Welcome to my Flask API!"
-
-@app.route('/student')
-def get_student():
     return jsonify({
-        "name": "Your Name",
-        "grade": 10,
-        "section": "Zechariah"
+        "message": "Welcome to Students API! 🌟",
+        "emoji": "🚀📚😊"
     })
 
-# Required for Render to bind to the correct port
-import os
+@app.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        grade = request.form.get('grade')
+        section = request.form.get('section')
+        if name and grade and section:
+            students.append({
+                "name": name,
+                "grade": grade,
+                "section": section
+            })
+        return redirect(url_for('dashboard'))
+    return render_template('dashboard.html', students=students)
+
+# Bind to Render's dynamic port
 port = int(os.environ.get("PORT", 5000))
 app.run(host='0.0.0.0', port=port)
