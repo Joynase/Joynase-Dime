@@ -12,7 +12,6 @@
       --text: #003f5c;
       --white: #ffffff;
     }
-
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to right, #e0f7fa, #cceeff);
@@ -21,25 +20,21 @@
       color: var(--text);
       font-size: 20px;
     }
-
     header {
       text-align: center;
       margin-bottom: 30px;
     }
-
     h1 {
       font-size: 42px;
       color: var(--primary);
       margin-bottom: 10px;
     }
-
     h2 {
       font-size: 32px;
       color: var(--secondary);
       margin-bottom: 20px;
       text-align: center;
     }
-
     .btn {
       padding: 12px 24px;
       margin: 10px;
@@ -50,18 +45,19 @@
       cursor: pointer;
       font-size: 20px;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 119, 182, 0.2);
     }
-
     .btn:hover {
       background-color: var(--secondary);
       transform: scale(1.05);
     }
-
+    .btn:active {
+      transform: scale(0.98);
+    }
     #dashboard-buttons {
       text-align: center;
       margin-top: 20px;
     }
-
     .section {
       display: none;
       animation: fadeIn 0.5s ease-in-out;
@@ -69,12 +65,10 @@
       max-width: 800px;
       margin: 0 auto;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
@@ -83,23 +77,19 @@
       overflow: hidden;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
     th, td {
       padding: 12px;
       text-align: left;
       font-size: 18px;
       border-bottom: 1px solid var(--bg);
     }
-
     th {
       background-color: var(--primary);
       color: var(--white);
     }
-
     td {
       background-color: var(--white);
     }
-
     input[type="text"], input[type="number"] {
       width: 100%;
       padding: 10px;
@@ -108,7 +98,6 @@
       border-radius: 8px;
       font-size: 18px;
     }
-
     form {
       background-color: var(--accent);
       padding: 20px;
@@ -116,51 +105,28 @@
       box-shadow: 0 0 10px rgba(0, 119, 182, 0.3);
       box-sizing: border-box;
     }
-
     label {
       font-weight: bold;
       margin-bottom: 5px;
       display: block;
     }
-
     footer {
       text-align: center;
       margin-top: 40px;
       font-size: 16px;
       color: #555;
     }
-
     @media (max-width: 768px) {
-      body {
-        padding: 20px 10px;
-        font-size: 18px;
-      }
-
-      h1 {
-        font-size: 32px;
-      }
-
-      h2 {
-        font-size: 24px;
-      }
-
-      .btn {
-        font-size: 18px;
-        padding: 10px 16px;
-      }
-
-      th, td {
-        font-size: 16px;
-      }
-
-      input, form {
-        font-size: 16px;
-      }
+      body { padding: 20px 10px; font-size: 18px; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 24px; }
+      .btn { font-size: 18px; padding: 10px 16px; }
+      th, td { font-size: 16px; }
+      input, form { font-size: 16px; }
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>🎓 Student Dashboard</h1>
     <p>Manage your students with clarity and joy ✨</p>
@@ -174,16 +140,12 @@
   <div id="view" class="section">
     <h2>📋 Student List</h2>
     <table>
-      <tr><th>Name</th><th>Grade</th><th>Section</th><th>Actions</th></tr>
+      <tr><th>Name</th><th>Grade</th><th>Section</th></tr>
       {% for student in students %}
       <tr>
         <td>{{ student.name }}</td>
         <td>{{ student.grade }}</td>
         <td>{{ student.section }}</td>
-        <td>
-          <button class="btn" onclick="editStudent('{{ student.id }}', '{{ student.name }}', '{{ student.grade }}', '{{ student.section }}')">🖊️ Edit</button>
-          <button class="btn" onclick="deleteStudent('{{ student.id }}')">🗑️ Delete</button>
-        </td>
       </tr>
       {% endfor %}
     </table>
@@ -204,93 +166,29 @@
     <button class="btn" onclick="goHome()">🏠 Back to Dashboard</button>
   </div>
 
-  <div id="edit" class="section">
-    <h2>🛠️ Edit Student</h2>
-    <form id="editForm">
-      <input type="hidden" name="id" id="edit-id">
-      <label for="edit-name">Name:</label>
-      <input type="text" name="name" id="edit-name" required>
-      <label for="edit-grade">Grade:</label>
-      <input type="number" name="grade" id="edit-grade" required>
-      <label for="edit-section">Section:</label>
-      <input type="text" name="section" id="edit-section" required>
-      <button type="submit" class="btn">💾 Save Changes</button>
-    </form>
-    <button class="btn" onclick="goHome()">🏠 Back to Dashboard</button>
-  </div>
-
   <footer>
     Created with 💕 Flask & Python 3.12 — Powered by Joynaizzx
   </footer>
 
-<script>
-  function showSection(id) {
-    document.getElementById('view').style.display = 'none';
-    document.getElementById('add').style.display = 'none';
-    document.getElementById('edit').style.display = 'none';
-    document.getElementById('dashboard-buttons').style.display = 'none';
-    document.getElementById(id).style.display = 'flex';
-  }
-
-  function goHome() {
-    document.getElementById('view').style.display = 'none';
-    document.getElementById('add').style.display = 'none';
-    document.getElementById('edit').style.display = 'none';
-    document.getElementById('dashboard-buttons').style.display = 'block';
-  }
-
-  function editStudent(id, name, grade, section) {
-    showSection('edit');
-    document.getElementById('edit-id').value = id;
-    document.getElementById('edit-name').value = name;
-    document.getElementById('edit-grade').value = grade;
-    document.getElementById('edit-section').value = section;
-  }
-
-  document.getElementById('editForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const id = document.getElementById('edit-id').value;
-    const updatedStudent = {
-      name: document.getElementById('edit-name').value,
-      grade: document.getElementById('edit-grade').value,
-      section: document.getElementById('edit-section').value
-    };
-
-    fetch(`/students/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedStudent)
-    }).then(res => {
-      if (res.ok) {
-        alert("✅ Student updated!");
-        location.reload();
-      } else {
-        alert("⚠️ Failed to update student.");
-      }
-    });
-  });
-
-  function deleteStudent(id) {
-    if (confirm("Are you sure you want to delete this student?")) {
-      fetch(`/students/${id}`, {
-        method: 'DELETE'
-      }).then(res => {
-        if (res.ok) {
-          alert("🗑️ Student deleted!");
-          location.reload();
-        } else {
-          alert("⚠️ Failed to delete student.");
-        }
-      });
+  <script>
+    function showSection(id) {
+      document.getElementById('view').style.display = 'none';
+      document.getElementById('add').style.display = 'none';
+      document.getElementById('dashboard-buttons').style.display = 'none';
+      document.getElementById(id).style.display = 'flex';
     }
-  }
 
-  {% if show_view %}
-  window.onload = function() {
-    showSection('view');
-  };
-  {% endif %}
-</script>
+    function goHome() {
+      document.getElementById('view').style.display = 'none';
+      document.getElementById('add').style.display = 'none';
+      document.getElementById('dashboard-buttons').style.display = 'block';
+    }
 
+    window.onload = function() {
+      {% if show_view %}
+      showSection('view');
+      {% endif %}
+    };
+  </script>
 </body>
 </html>
