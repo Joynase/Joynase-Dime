@@ -49,7 +49,7 @@
 
     .section {
       margin-top: 20px;
-      display: none; /* hidden by default */
+      display: none;
       animation: fadeIn 0.5s ease-in-out;
       flex-direction: column;
       align-items: center;
@@ -66,25 +66,23 @@
       margin: 0 auto;
       border-collapse: collapse;
       margin-top: 10px;
-      background-color: #cceeff;
+      background-color: #cceeff; /* sky blue background */
       border-radius: 8px;
       overflow: hidden;
     }
 
     th, td {
-      border: 1px solid #f8bbd0;
+      border: 1px solid #87ceeb;
       padding: 10px;
       text-align: left;
       font-size: 20px;
+      background-color: #cceeff; /* match theme for all cells */
+      color: #003f5c;
     }
 
     th {
-      background-color: #fce4ec;
-      color: #880e4f;
-    }
-
-    table tr:nth-child(even) {
       background-color: #b3e0f2;
+      color: #005f8f;
     }
 
     input[type="text"], input[type="number"] {
