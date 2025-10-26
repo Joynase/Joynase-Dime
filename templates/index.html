@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #87ceeb; /* solid sky blue */
+      background-color: #87ceeb;
       margin: 0;
       padding: 20px;
       color: #333;
@@ -17,12 +17,13 @@
       text-align: center;
       color: #0077b6;
       margin-bottom: 10px;
-      font-size: 30px;
+      font-size: 38px;
     }
 
     h2 {
       color: #005f8f;
-      font-size: 30px;
+      font-size: 36px;
+      text-align: center;
     }
 
     .btn {
@@ -41,10 +42,17 @@
       background-color: #005f8f;
     }
 
+    #dashboard-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
     .section {
       margin-top: 20px;
       display: none;
       animation: fadeIn 0.5s ease-in-out;
+      flex-direction: column;
+      align-items: center;
     }
 
     @keyframes fadeIn {
@@ -54,9 +62,11 @@
 
     table {
       width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
       border-collapse: collapse;
       margin-top: 10px;
-      background: white;
+      background-color: #cceeff;
       border-radius: 8px;
       overflow: hidden;
     }
@@ -73,6 +83,10 @@
       color: #880e4f;
     }
 
+    table tr:nth-child(even) {
+      background-color: #b3e0f2;
+    }
+
     input[type="text"], input[type="number"] {
       width: 100%;
       padding: 10px;
@@ -83,10 +97,10 @@
     }
 
     form {
-      background: white;
+      background-color: #cceeff;
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+      box-shadow: 0 0 10px rgba(0, 119, 182, 0.3);
       max-width: 600px;
       margin: auto;
     }
@@ -94,7 +108,7 @@
     footer {
       text-align: center;
       margin-top: 40px;
-      font-size: 20px;
+      font-size: 18px;
       color: #555;
     }
 
@@ -128,7 +142,7 @@
 
   <h1>🎓 Student Dashboard</h1>
 
-  <div style="text-align:center;">
+  <div id="dashboard-buttons">
     <button class="btn" onclick="showSection('view')">👀 View Students</button>
     <button class="btn" onclick="showSection('add')">➕ Add New Student</button>
   </div>
@@ -145,6 +159,7 @@
       </tr>
       {% endfor %}
     </table>
+    <button class="btn" onclick="goHome()">🏠 Back to Dashboard</button>
   </div>
 
   <div id="add" class="section">
@@ -158,6 +173,7 @@
       <input type="text" name="section" required><br>
       <button type="submit" class="btn">✅ Submit</button>
     </form>
+    <button class="btn" onclick="goHome()">🏠 Back to Dashboard</button>
   </div>
 
   <footer>
@@ -168,7 +184,14 @@
     function showSection(id) {
       document.getElementById('view').style.display = 'none';
       document.getElementById('add').style.display = 'none';
-      document.getElementById(id).style.display = 'block';
+      document.getElementById('dashboard-buttons').style.display = 'none';
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function goHome() {
+      document.getElementById('view').style.display = 'none';
+      document.getElementById('add').style.display = 'none';
+      document.getElementById('dashboard-buttons').style.display = 'block';
     }
   </script>
 
