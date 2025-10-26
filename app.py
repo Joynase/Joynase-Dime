@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template, redirect
+from flask import Flask, jsonify, request, render_template, redirect, url_for
 
 app = Flask(__name__)
 
@@ -32,9 +32,13 @@ def dashboard():
             "section": section
         })
 
-        return redirect('/dashboard')
+        # ✅ Redirect with query parameter to show student list
+        return redirect(url_for('dashboard', show_view='true'))
 
-    return render_template('index.html', students=students)
+    # ✅ Check if we should auto-show the student list
+    show_view = request.args.get('show_view') == 'true'
+
+    return render_template('index.html', students=students, show_view=show_view)
 
 if __name__ == '__main__':
     app.run(debug=True)
