@@ -52,7 +52,7 @@
       display: none;
       animation: fadeIn 0.5s ease-in-out;
       flex-direction: column;
-      align-items: center;
+      width: 100%; /* ✅ allow full width */
     }
 
     @keyframes fadeIn {
@@ -100,8 +100,7 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 119, 182, 0.3);
       width: 100%;
-      max-width: none;
-      margin: 0;
+      margin: 0 auto;
       box-sizing: border-box;
     }
 
