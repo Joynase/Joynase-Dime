@@ -20,25 +20,39 @@ def get_student():
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     if request.method == 'POST':
-        # Get form data
         name = request.form['name']
         grade = request.form['grade']
         section = request.form['section']
-
-        # Add new student to list
         students.append({
             "name": name,
-            "grade": grade,
+            "grade": int(grade),
             "section": section
         })
-
-        # ✅ Redirect with query parameter to show student list
         return redirect(url_for('dashboard', show_view='true'))
 
-    # ✅ Check if we should auto-show the student list
     show_view = request.args.get('show_view') == 'true'
-
     return render_template('index.html', students=students, show_view=show_view)
+
+# 🖊️ Update student by ID
+@app.route('/students/<int:id>', methods=['PUT'])
+def update_student(id):
+    if id < 0 or id >= len(students):
+        return jsonify({"error": "Student not found"}), 404
+
+    data = request.get_json()
+    students[id]['name'] = data['name']
+    students[id]['grade'] = int(data['grade'])
+    students[id]['section'] = data['section']
+    return jsonify({"message": "Student updated successfully"})
+
+# 🗑️ Delete student by ID
+@app.route('/students/<int:id>', methods=['DELETE'])
+def delete_student(id):
+    if id < 0 or id >= len(students):
+        return jsonify({"error": "Student not found"}), 404
+
+    students.pop(id)
+    return jsonify({"message": "Student deleted successfully"})
 
 if __name__ == '__main__':
     app.run(debug=True)
