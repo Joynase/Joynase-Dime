@@ -72,20 +72,37 @@
       font-size: 20px;
     }
 
-    th {
-      background-color: #fce4ec;
-      color: #880e4f;
-    }
+/* Center the Student List heading */
+#view h2 {
+  text-align: center;
+}
 
-    /* 🌤️ Sky blue row styling */
-    table tr {
-      background-color: #cceeff;
-    }
+/* Center the table */
+#view table {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #cceeff; /* sky blue background */
+}
 
-    table tr:nth-child(even) {
-      background-color: #b3e0f2;
-    }
+/* Optional: alternate row colors for clarity */
+#view table tr:nth-child(even) {
+  background-color: #b3e0f2;
+}
+/* Center the Add New Student heading */
+#add h2 {
+  text-align: center;
+}
 
+/* Center the form container */
+#add form {
+  margin: 0 auto;
+  background-color: #cceeff; /* sky blue background */
+}
+
+/* Optional: soften the form shadow to match the theme */
+#add form {
+  box-shadow: 0 0 10px rgba(0, 119, 182, 0.3);
+}
     input[type="text"], input[type="number"] {
       width: 100%;
       padding: 10px;
