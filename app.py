@@ -4,13 +4,13 @@ app = Flask(__name__)
 
 # Temporary in-memory list to store students
 students = [
-    {"name": "Your Name", "grade": 10, "section": "Zechariah"}
+    {"name": "Joynase", "grade": 3, "section": "Stallman"}
 ]
 
 # 🌐 API Routes
 @app.route('/')
 def home():
-    return "Welcome to my Flask API!"
+    return "Welcome to Joynase Flask API!"
 
 @app.route('/student')
 def get_student():
@@ -56,3 +56,4 @@ def delete_student(id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
