@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎓 Student Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffe4ec, #ffc0cb);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e91e63;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #d81b60;
+    }
+
+    .section {
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #f8bbd0;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #fce4ec;
+      color: #880e4f;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #e91e63;
+      border-radius: 8px;
+    }
+
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 192, 203, 0.5);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎓 Student Dashboard</h1>
+
+  <div style="text-align:center;">
+    <button class="btn" onclick="showSection('view')">👀 View Students</button>
+    <button class="btn" onclick="showSection('add')">➕ Add New Student</button>
+  </div>
+
+  <div id="view" class="section">
+    <h2>📋 Student List</h2>
+    <table>
+      <tr><th>Name</th><th>Grade</th><th>Section</th></tr>
+      {% for student in students %}
+      <tr>
+        <td>{{ student.name }}</td>
+        <td>{{ student.grade }}</td>
+        <td>{{ student.section }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div id="add" class="section">
+    <h2>📝 Add New Student</h2>
+    <form method="POST">
+      <label>Name:</label><br>
+      <input type="text" name="name" required><br>
+      <label>Grade:</label><br>
+      <input type="number" name="grade" required><br>
+      <label>Section:</label><br>
+      <input type="text" name="section" required><br>
+      <button type="submit" class="btn">✅ Submit</button>
+    </form>
+  </div>
+
+  <footer>
+    Created with 💕 Flask & Python 3.12 — Powered by Joynaizzx
+  </footer>
+
+  <script>
+    function showSection(id) {
+      document.getElementById('view').style.display = 'none';
+      document.getElementById('add').style.display = 'none';
+      document.getElementById(id).style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
