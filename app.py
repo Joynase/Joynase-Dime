@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 # Temporary in-memory list to store students
 students = [
-    {"name": "Joynase", "grade": 3, "section": "Stallman"}
+    {"name": "Joynase", "grade": 3, "section": "Stallman"}, {"name": "Ange", "grade": 3, "section": "Sanservia"}
 ]
 
 # 🌐 API Routes
@@ -56,4 +56,5 @@ def delete_student(id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
