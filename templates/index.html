@@ -66,7 +66,7 @@
       margin: 0 auto;
       border-collapse: collapse;
       margin-top: 10px;
-      background-color: #cceeff; /* sky blue background */
+      background-color: #cceeff;
       border-radius: 8px;
       overflow: hidden;
     }
@@ -76,14 +76,14 @@
       padding: 10px;
       text-align: left;
       font-size: 22px;
-      background-color: #cceeff; /* match theme for all cells */
+      background-color: #cceeff;
       color: #003f5c;
     }
 
     th {
-    background-color: #87ceeb; /* sky blue */
-   color: black; /* deep readable text */
-   }
+      background-color: #87ceeb;
+      color: black;
+    }
 
     input[type="text"], input[type="number"] {
       width: 100%;
@@ -94,18 +94,17 @@
       font-size: 22px;
     }
 
-form {
-  background-color: #cceeff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 119, 182, 0.3);
-  max-width: 1200px;
-  width: 100%;
-  margin: auto;
-  box-sizing: border-box;
-}
+    form {
+      background-color: #cceeff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 119, 182, 0.3);
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      box-sizing: border-box;
+    }
 
-    
     footer {
       text-align: center;
       margin-top: 40px;
@@ -113,7 +112,6 @@ form {
       color: #555;
     }
 
-    /* 📱 Responsive Design */
     @media (max-width: 768px) {
       body {
         padding: 10px;
@@ -163,12 +161,19 @@ form {
     <button class="btn" onclick="goHome()">🏠 Back to Dashboard</button>
   </div>
 
-<div style="display: flex; gap: 20px;">
-  <input type="text" name="name" placeholder="Name" required style="flex: 1;">
-  <input type="number" name="grade" placeholder="Grade" required style="flex: 1;">
-  <input type="text" name="section" placeholder="Section" required style="flex: 1;">
-</div>
-  
+  <div id="add" class="section">
+    <h2>📝 Add New Student</h2>
+    <form method="POST">
+      <label>Name:</label><br>
+      <input type="text" name="name" required><br>
+      <label>Grade:</label><br>
+      <input type="number" name="grade" required><br>
+      <label>Section:</label><br>
+      <input type="text" name="section" required><br>
+      <button type="submit" class="btn">✅ Submit</button>
+    </form>
+    <button class="btn" onclick="goHome()">🏠 Back to Dashboard</button>
+  </div>
 
   <footer>
     Created with 💕 Flask & Python 3.12 — Powered by Joynaizzx
