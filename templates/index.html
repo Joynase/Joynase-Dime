@@ -44,10 +44,8 @@
 
     .section {
       margin-top: 20px;
-      display: none;
+      display: none; /* hidden by default */
       animation: fadeIn 0.5s ease-in-out;
-      display: flex;
-      justify-content: center;
       flex-direction: column;
       align-items: center;
     }
@@ -179,7 +177,7 @@
     function showSection(id) {
       document.getElementById('view').style.display = 'none';
       document.getElementById('add').style.display = 'none';
-      document.getElementById(id).style.display = 'block';
+      document.getElementById(id).style.display = 'flex'; // show as flex to preserve layout
     }
   </script>
 
