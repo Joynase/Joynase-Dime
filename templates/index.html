@@ -4,42 +4,57 @@
   <meta charset="UTF-8">
   <title>🎓 Student Dashboard</title>
   <style>
+    :root {
+      --primary: #0077b6;
+      --secondary: #005f8f;
+      --accent: #cceeff;
+      --bg: #e0f7fa;
+      --text: #003f5c;
+      --white: #ffffff;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #87ceeb;
+      background: linear-gradient(to right, #e0f7fa, #cceeff);
       margin: 0;
-      padding: 50px;
-      color: #333;
-      font-size: 22px;
+      padding: 40px 20px;
+      color: var(--text);
+      font-size: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
     }
 
     h1 {
-      text-align: center;
-      color: #0077b6;
+      font-size: 42px;
+      color: var(--primary);
       margin-bottom: 10px;
-      font-size: 40px;
     }
 
     h2 {
-      color: #005f8f;
-      font-size: 38px;
+      font-size: 32px;
+      color: var(--secondary);
+      margin-bottom: 20px;
       text-align: center;
     }
 
     .btn {
       padding: 12px 24px;
       margin: 10px;
-      background-color: #0077b6;
-      color: white;
+      background-color: var(--primary);
+      color: var(--white);
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 22px;
-      transition: background-color 0.3s ease;
+      font-size: 20px;
+      transition: all 0.3s ease;
     }
 
     .btn:hover {
-      background-color: #005f8f;
+      background-color: var(--secondary);
+      transform: scale(1.05);
     }
 
     #dashboard-buttons {
@@ -48,11 +63,11 @@
     }
 
     .section {
-      margin-top: 20px;
       display: none;
       animation: fadeIn 0.5s ease-in-out;
       flex-direction: column;
-      width: 100%; /* ✅ allow full width */
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     @keyframes fadeIn {
@@ -62,63 +77,71 @@
 
     table {
       width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
       border-collapse: collapse;
-      margin-top: 10px;
-      background-color: #cceeff;
-      border-radius: 8px;
+      background-color: var(--accent);
+      border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     th, td {
-      border: 1px solid #87ceeb;
-      padding: 10px;
+      padding: 12px;
       text-align: left;
-      font-size: 22px;
-      background-color: #cceeff;
-      color: #003f5c;
+      font-size: 18px;
+      border-bottom: 1px solid var(--bg);
     }
 
     th {
-      background-color: #87ceeb;
-      color: black;
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    td {
+      background-color: var(--white);
     }
 
     input[type="text"], input[type="number"] {
       width: 100%;
       padding: 10px;
       margin-bottom: 12px;
-      border: 1px solid #0077b6;
+      border: 2px solid var(--primary);
       border-radius: 8px;
-      font-size: 22px;
+      font-size: 18px;
     }
 
     form {
-      background-color: #cceeff;
+      background-color: var(--accent);
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 119, 182, 0.3);
-      width: 100%;
-      margin: 0 auto;
       box-sizing: border-box;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
     }
 
     footer {
       text-align: center;
       margin-top: 40px;
-      font-size: 18px;
+      font-size: 16px;
       color: #555;
     }
 
     @media (max-width: 768px) {
       body {
-        padding: 10px;
+        padding: 20px 10px;
         font-size: 18px;
       }
 
-      h1, h2 {
-        font-size: 26px;
+      h1 {
+        font-size: 32px;
+      }
+
+      h2 {
+        font-size: 24px;
       }
 
       .btn {
@@ -126,19 +149,22 @@
         padding: 10px 16px;
       }
 
-      th, td, input[type="text"], input[type="number"], footer {
-        font-size: 18px;
+      th, td {
+        font-size: 16px;
       }
 
-      form {
-        padding: 15px;
+      input, form {
+        font-size: 16px;
       }
     }
   </style>
 </head>
 <body>
 
-<h1>🎓 Student Dashboard</h1>
+  <header>
+    <h1>🎓 Student Dashboard</h1>
+    <p>Manage your students with clarity and joy ✨</p>
+  </header>
 
   <div id="dashboard-buttons">
     <button class="btn" onclick="showSection('view')">👀 View Students</button>
@@ -163,12 +189,15 @@
   <div id="add" class="section">
     <h2>📝 Add New Student</h2>
     <form method="POST">
-      <label>Name:</label><br>
-      <input type="text" name="name" required><br>
-      <label>Grade:</label><br>
-      <input type="number" name="grade" required><br>
-      <label>Section:</label><br>
-      <input type="text" name="section" required><br>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
+
+      <label for="grade">Grade:</label>
+      <input type="number" name="grade" id="grade" required>
+
+      <label for="section">Section:</label>
+      <input type="text" name="section" id="section" required>
+
       <button type="submit" class="btn">✅ Submit</button>
     </form>
     <button class="btn" onclick="goHome()">🏠 Back to Dashboard</button>
@@ -192,7 +221,6 @@
       document.getElementById('dashboard-buttons').style.display = 'block';
     }
 
-    // ✅ Auto-show student list if redirected after submission
     {% if show_view %}
     window.onload = function() {
       showSection('view');
