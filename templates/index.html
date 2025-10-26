@@ -138,7 +138,7 @@
 </head>
 <body>
 
-  <h1>🎓 Student Dashboard</h1>
+<h1>🎓 Student Dashboard</h1>
 
   <div id="dashboard-buttons">
     <button class="btn" onclick="showSection('view')">👀 View Students</button>
@@ -191,6 +191,13 @@
       document.getElementById('add').style.display = 'none';
       document.getElementById('dashboard-buttons').style.display = 'block';
     }
+
+    // ✅ Auto-show student list if redirected after submission
+    {% if show_view %}
+    window.onload = function() {
+      showSection('view');
+    };
+    {% endif %}
   </script>
 
 </body>
