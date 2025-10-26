@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .btn { padding: 10px 20px; margin: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        .btn:hover { background-color: #45a049; }
+        .section { margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+    <h1>🎓 Student Dashboard</h1>
+
+    <button class="btn" onclick="showSection('view')">👀 View Students</button>
+    <button class="btn" onclick="showSection('add')">➕ Add New Student</button>
+
+    <div id="view" class="section" style="display:none;">
+        <h2>Student List</h2>
+        <table>
+            <tr><th>Name</th><th>Grade</th><th>Section</th></tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.grade }}</td>
+                <td>{{ student.section }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div id="add" class="section" style="display:none;">
+        <h2>Add New Student</h2>
+        <form method="POST">
+            <label>Name:</label><br>
+            <input type="text" name="name" required><br><br>
+            <label>Grade:</label><br>
+            <input type="number" name="grade" required><br><br>
+            <label>Section:</label><br>
+            <input type="text" name="section" required><br><br>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function showSection(id) {
+            document.getElementById('view').style.display = 'none';
+            document.getElementById('add').style.display = 'none';
+            document.getElementById(id).style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
